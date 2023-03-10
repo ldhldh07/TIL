@@ -423,3 +423,47 @@ const는 컴파일하기 전에 알수 있는 값
 짱임
 
 Ctrl alt M - 메소드 추출
+
+## Transform
+
+### Transform.scale()
+
+#### child
+
+Transform.scale()에 넣으면 커지는데 상위 위젯 크기가 바뀌진 않는다
+
+### Transform.translate
+
+#### offset
+
+x, y좌표
+
+#### child
+
+
+
+## Container
+
+### ClipBehavior
+
+overflow됐을때
+
+#### Clip
+
+###### hardedge
+
+잘라냄
+
+
+
+# 클래스
+
+생성했을 때 변수로 값 넣게 하거나 아니면 isInverted처럼 bool 값으로 하고 
+
+`isInverted ? Colors.white : Colors.black`
+
+이렇게 넣을 수도 있음
+
+## SingleChildScrollView
+
+이거 하면 스크롤
