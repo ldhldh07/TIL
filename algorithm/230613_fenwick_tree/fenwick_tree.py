@@ -14,3 +14,8 @@ class FenwickTree:
             cumulative_sum += self.tree[i]
             i -= i & -i
         return cumulative_sum
+    
+
+'''
+https://www.acmicpc.net/blog/view/21
+'''
