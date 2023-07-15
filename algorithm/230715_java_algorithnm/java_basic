@@ -1,0 +1,317 @@
+### 입력
+
+```java
+	BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+```
+
+```java
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        String s = scanner.next(); // 단어 하나를 입력 받음
+        int i = scanner.nextInt(); // 정수 하나를 입력 받음
+
+        scanner.close(); // 스캐너를 닫아 리소스를 반환함
+    }
+}
+
+```
+
+```java
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        String s = br.readLine(); // 한 줄을 입력 받음
+        int i = Integer.parseInt(br.readLine()); // 한 줄을 입력 받아 정수로 변환함
+
+        br.close(); // BufferedReader를 닫아 리소스를 반환함
+    }
+}
+
+```
+
+### ArrayList
+
+`        ArrayList<Integer> list = new ArrayList<Integer>(); // Integer 타입의 ArrayList를 생성합니다.`
+
+- `add(E element)`: 리스트의 끝에 지정된 요소를 추가합니다.
+- `get(int index)`: 리스트에서 지정된 위치에 있는 요소를 반환합니다.
+- `remove(int index)`: 리스트에서 지정된 위치에 있는 요소를 제거합니다.
+- `size()`: 리스트의 크기(요소의 수)를 반환합니다.
+
+```java
+import java.util.ArrayList;
+
+public class Main {
+    public static void main(String[] args) {
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        
+        list.add(1);  // list에 1 추가
+        list.add(2);  // list에 2 추가
+        list.add(3);  // list에 3 추가
+
+        System.out.println(list.get(0)); // 0번 인덱스의 값을 출력, 출력: 1
+
+        list.remove(1);  // 1번 인덱스의 값을 제거
+
+        System.out.println(list.size()); // 리스트의 크기 출력, 출력: 2
+    }
+}
+	
+```
+
+
+네, 맞습니다. Java에서 Array와 List는 서로 다른 자료구조를 가지고 있습니다. 각각의 특징은 다음과 같습니다:
+
+1. Array(배열):
+   - 배열의 크기는 생성 시점에 정해지며, 그 후로 변경할 수 없습니다.
+   - 배열은 원시 타입(primitive type, int, double, char 등)을 저장할 수 있습니다.
+   - 배열은 연속적인 메모리 공간에 데이터를 저장하므로, 인덱스를 이용한 데이터 접근이 빠릅니다.
+   - 하지만 배열의 크기는 고정되어 있기 때문에, 데이터의 추가나 삭제가 불편하고, 크기를 변경하려면 새로운 배열을 생성해야 합니다.
+2. List:
+   - List는 인터페이스로, ArrayList나 LinkedList 등이 List 인터페이스를 구현하고 있습니다.
+   - List의 크기는 동적입니다. 즉, 요소를 추가하거나 제거하면서 크기가 자동으로 조절됩니다.
+   - List는 오직 객체만을 저장할 수 있습니다. 원시 타입을 저장하려면 해당 원시 타입의 Wrapper 클래스(Integer, Double, Character 등)를 사용해야 합니다.
+   - List 인터페이스를 구현한 클래스들은 내부적으로 데이터를 어떻게 관리하느냐에 따라 성능 차이가 나타날 수 있습니다. 예를 들어, ArrayList는 내부적으로 배열을 사용하기 때문에 인덱스를 이용한 데이터 접근이 빠르지만, LinkedList는 데이터 추가/삭제에 유리합니다.
+
+따라서 어떤 자료구조를 사용할지는 상황에 따라 결정해야 합니다. 배열이 필요한 경우도 있고, List가 필요한 경우도 있습니다.
+
+### asList
+
+```java
+List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
+```
+
+### Node 클래스화
+
+```java
+public class ListNode {
+    int val; // 노드가 가지는 값
+    ListNode next; // 다음 노드에 대한 참조
+
+    ListNode(int val) { 
+        this.val = val; 
+    }  // 생성자
+}
+
+```
+
+```java
+public class TreeNode {
+    int val;
+    TreeNode left; // 왼쪽 자식 노드에 대한 참조
+    TreeNode right; // 오른쪽 자식 노드에 대한 참조
+
+    TreeNode(int val) {
+        this.val = val;
+    }
+}
+
+```
+
+### Queue
+
+Queue 인터페이스의 주요 메서드에는 다음과 같은 것들이 있습니다:
+
+- `add(E element)`: 큐의 끝에 요소를 추가합니다.
+- `remove()`: 큐의 앞에서 요소를 삭제하고 반환합니다. 큐가 비어 있으면 예외를 발생시킵니다.
+- `peek()`: 큐의 앞에서 요소를 삭제하지 않고 반환합니다. 큐가 비어 있으면 null을 반환합니다.
+- `size()`: 큐의 크기(요소의 수)를 반환합니다.
+
+다음은 Queue의 사용 예제입니다:
+
+```java
+import java.util.LinkedList;
+import java.util.Queue;
+
+public class Main {
+    public static void main(String[] args) {
+        Queue<Integer> queue = new LinkedList<Integer>();
+        
+        queue.add(1);  // queue에 1 추가
+        queue.add(2);  // queue에 2 추가
+        queue.add(3);  // queue에 3 추가
+
+        System.out.println(queue.peek()); // queue의 앞쪽 요소 확인
+
+```
+
+### map
+
+```java
+import java.io.*;
+import java.util.*;
+import java.util.stream.*;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+        int N = Integer.parseInt(br.readLine());
+        String input = br.readLine();
+        String[] stringList = input.split(" ");
+
+        int[] inputList = Arrays.stream(stringList)
+                                .mapToInt(Integer::parseInt)
+                                .toArray();
+
+        // 배열의 내용을 출력합니다.
+        for (int num : inputList) {
+            System.out.println(num);
+        }
+    }
+}
+
+```
+
+
+
+```java
+import java.util.*;
+import java.util.stream.*;
+
+public class Main {
+    public static void main(String[] args) {
+        // String 리스트를 생성합니다.
+        List<String> stringList = Arrays.asList("1", "2", "3", "4", "5");
+
+        // map 메소드를 사용하여 stringList의 모든 요소를 Integer로 변환하고,
+        // collect 메소드를 사용하여 다시 List<Integer>로 만듭니다.
+        List<Integer> intList = stringList.stream()
+                                          .map(x -> Integer.parseInt(x))
+                                          .collect(Collectors.toList());
+
+        // 변환된 int 리스트를 출력합니다.
+        for (int num : intList) {
+            System.out.println(num);
+        }
+    }
+}
+
+```
+
+- Java 8의 Stream API는 컬렉션에서 연속된 요소를 처리하는 다양한 방법을 제공합니다. 그 중 `mapToInt`와 `map`은 스트림의 요소를 다른 형태로 변환하는 메소드입니다.
+
+  - `mapToInt`: 주어진 함수를 스트림의 각 요소에 적용한 결과를 포함하는 새로운 `IntStream`을 반환합니다. `IntStream`은 int 형식의 요소로 구성된 시퀀스를 다루는 스트림입니다. `toArray` 메소드는 이 `IntStream`을 int 배열로 변환합니다.
+
+  ```java
+  List<String> strings = Arrays.asList("1", "2", "3");
+  int[] numbers = strings.stream().mapToInt(Integer::parseInt).toArray(); // 결과: int 배열 [1, 2, 3]
+  ```
+
+  - `map`: 주어진 함수를 스트림의 각 요소에 적용한 결과를 포함하는 새로운 `Stream`을 반환합니다. 이후 `collect` 메소드를 사용하여 이 스트림을 다른 형태의 컬렉션으로 변환할 수 있습니다.
+
+  ```java
+  List<String> strings = Arrays.asList("1", "2", "3");
+  List<Integer> numbers = strings.stream().map(Integer::parseInt).collect(Collectors.toList()); // 결과: List<Integer> [1, 2, 3]
+  ```
+
+  결론적으로, `mapToInt`와 `toArray`를 함께 사용하면 스트림의 각 요소를 int 값으로 변환하고 이를 int 배열로 모을 수 있습니다. 반면, `map`과 `collect`를 함께 사용하면 스트림의 각 요소를 다른 형태로 변환하고 이를 List나 Set 같은 컬렉션으로 모을 수 있습니다.
+
+
+
+#### lambda
+
+```java
+import java.util.*;
+import java.util.stream.*;
+
+public class Main {
+    public static void main(String[] args) {
+        // String 리스트를 생성합니다.
+        List<String> stringList = Arrays.asList("1", "2", "3", "4", "5");
+
+        // map 메소드를 사용하여 stringList의 모든 요소를 Integer로 변환하고,
+        // collect 메소드를 사용하여 다시 List<Integer>로 만듭니다.
+        List<Integer> intList = stringList.stream()
+                                          .map(Integer::parseInt)
+                                          .collect(Collectors.toList());
+
+        // 변환된 int 리스트를 출력합니다.
+        for (int num : intList) {
+            System.out.println(num);
+        }
+    }
+}
+
+```
+
+### 형 변환
+
+`(int)`는 Java에서 형 변환(Type Casting)을 수행하는 문법입니다.
+
+형 변환은 한 자료형의 값을 다른 자료형으로 변환하는 것을 의미합니다. 이는 두 가지 형태로 나타날 수 있습니다:
+
+1. Widening Casting (자동 형 변환): 작은 데이터 타입을 큰 데이터 타입으로 변환할 때. 예를 들어, `int`를 `double`로 변환하는 것.
+2. Narrowing Casting (명시적 형 변환): 큰 데이터 타입을 작은 데이터 타입으로 변환할 때. 예를 들어, `double`을 `int`로 변환하는 것. 이때는 데이터 손실이 일어날 수 있으므로, 프로그래머가 명시적으로 형 변환을 지시해야 합니다.
+
+아래는 Narrowing Casting의 예시입니다:
+
+```java
+double myDouble = 9.78;
+int myInt = (int) myDouble; // Narrowing Casting
+
+System.out.println(myDouble);   // Outputs 9.78
+System.out.println(myInt);      // Outputs 9
+
+```
+
+여기서 `(int)`는 `myDouble`의 값을 `int` 형으로 변환하라는 지시입니다. 이때 `myDouble`의 값 `9.78`에서 소수부분 `.78`이 손실되고, `myInt`는 손실된 값 `9`만을 저장하게 됩니다.
+
+### min
+
+`.min()`은 Java 8의 Stream API에 포함된 메소드로, 스트림의 요소 중 최소값을 찾습니다. 이 메소드는 OptionalInt 객체를 반환합니다.
+
+Optional 클래스는 '값이 있을 수도, 없을 수도 있는' 컨테이너 객체입니다. 즉, 값이 존재하면 이 값을 가져올 수 있고, 값이 없으면 기본 값을 설정하거나 예외를 발생시킬 수 있습니다.
+
+따라서 `.min()`의 결과가 값이 없을 경우를 대비해 `.getAsInt()` 메소드를 호출해서 int 값을 가져옵니다. 만약 `.min()`의 결과가 비어있는 Optional 객체라면, `.getAsInt()`는 NoSuchElementException을 발생시킵니다.
+
+그러나 이 코드에서는 숫자의 배열이 항상 하나 이상의 요소를 포함하므로, `.min()`이 비어있는 Optional 객체를 반환하는 경우는 없습니다. 그래서 안전하게 `.getAsInt()`를 호출할 수 있습니다.
+
+```java
+import java.util.Arrays;
+
+public class Main {
+    public static void main(String[] args) {
+        int[] numbers = {1, 2, 3, 4, 5};
+
+        int min = Arrays.stream(numbers).min().getAsInt();
+
+        System.out.println("Minimum value: " + min); // 출력: "Minimum value: 1"
+    }
+}
+
+```
+
+### Math.pow()
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        double base = 2;
+        double exponent = 3;
+
+        // 2의 3제곱을 계산합니다.
+        double result = Math.pow(base, exponent);
+
+        System.out.println(result);  // 출력: 8.0
+    }
+}
+
+```
+
+```java
+int min = (int) Math.pow(10, 6);
+
+```
+
