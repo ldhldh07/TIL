@@ -1,4 +1,4 @@
-### 입력
+## 입력
 
 ```java
 	BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -39,7 +39,7 @@ public class Main {
 
 ```
 
-### ArrayList
+## ArrayList
 
 `        ArrayList<Integer> list = new ArrayList<Integer>(); // Integer 타입의 ArrayList를 생성합니다.`
 
@@ -85,13 +85,228 @@ public class Main {
 
 따라서 어떤 자료구조를 사용할지는 상황에 따라 결정해야 합니다. 배열이 필요한 경우도 있고, List가 필요한 경우도 있습니다.
 
-### asList
+### Arrays.
+
+Java의 `java.util.Arrays` 클래스는 배열에 대한 유용한 유틸리티 메소드를 제공합니다. 여기에는 다음과 같은 메소드들이 포함됩니다:
+
+1. **toString(array)** - 배열을 문자열로 변환합니다. 각 요소는 쉼표와 공백으로 구분됩니다. 이 메소드는 배열의 내용을 인쇄하거나 디버깅에 유용합니다.
+
+   ```java
+   int[] array = {1, 2, 3};
+   System.out.println(Arrays.toString(array));  // Outputs: [1, 2, 3]
+   ```
+
+2. **sort(array)** - 배열의 요소를 오름차순으로 정렬합니다.
+
+   ```java
+   int[] array = {3, 1, 2};
+   Arrays.sort(array);
+   System.out.println(Arrays.toString(array));  // Outputs: [1, 2, 3]
+   ```
+
+3. **equals(array1, array2)** - 두 배열이 동일한지 확인합니다. 이 메소드는 두 배열의 길이와 각 요소가 동일한지 비교합니다.
+
+   ```java
+   int[] array1 = {1, 2, 3};
+   int[] array2 = {1, 2, 3};
+   System.out.println(Arrays.equals(array1, array2));  // Outputs: true
+   ```
+
+4. **fill(array, value)** - 주어진 값으로 배열의 모든 요소를 채웁니다.
+
+   ```java
+   int[] array = new int[5];
+   Arrays.fill(array, 1);
+   System.out.println(Arrays.toString(array));  // Outputs: [1, 1, 1, 1, 1]
+   ```
+
+5. **copyOf(array, length)** - 배열의 복사본을 생성하고 반환합니다. 새 배열의 길이는 주어진 길이입니다.
+
+   ```java
+   int[] array1 = {1, 2, 3};
+   int[] array2 = Arrays.copyOf(array1, array1.length);
+   System.out.println(Arrays.toString(array2));  // Outputs: [1, 2, 3]
+   ```
+
+6. **binarySearch(array, key)** - 배열에서 특정 값의 인덱스를 찾습니다. 배열은 정렬되어 있어야 합니다.
+
+   ```java
+   javaCopy codeint[] array = {1, 2, 3};
+   int index = Arrays.binarySearch(array, 2);
+   System.out.println(index);  // Outputs: 1
+   ```
+
+이와 같은 메소드들 외에도 `java.util.Arrays` 클래스는 `deepToString()`, `deepEquals()`, `hashCode()`, `deepHashCode()`, `asList()` 등의 메소드를 포함하고 있습니다. 이 메소드들은 다차원 배열이나 배열과 리스트 간의 변환 등, 더 복잡한 연산을 지원합니다.
+
+#### asList
 
 ```java
 List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
 ```
 
-### Node 클래스화
+#### Arrays.stream()
+
+`Arrays.stream()`와 `.stream()`는 모두 Java 8에서 도입된 Stream API를 이용해서 배열이나 컬렉션을 스트림으로 변환하는 메소드입니다. 그러나 이 두 메소드는 사용되는 대상에 따라 다르게 적용됩니다.
+
+1. **Arrays.stream()**: 이 메소드는 java.util.Arrays 클래스의 정적 메소드로서, 배열을 스트림으로 변환하는데 사용됩니다.
+
+   예를 들어:
+
+   ```java
+   int[] array = {1, 2, 3, 4, 5};
+   IntStream stream = Arrays.stream(array);
+   ```
+
+   위 코드에서, `Arrays.stream()` 메소드는 int 배열을 IntStream으로 변환합니다. IntStream은 기본형 int의 스트림을 나타내는 특수한 스트림입니다.
+
+2. **.stream()**: 이 메소드는 Collection 인터페이스(예: List, Set)의 메소드로서, 컬렉션을 스트림으로 변환하는데 사용됩니다.
+
+   예를 들어:
+
+   ```java
+   List<Integer> list = Arrays.asList(1, 2, 3, 4, 5);
+   Stream<Integer> stream = list.stream();
+   ```
+
+   위 코드에서, `.stream()` 메소드는 List 컬렉션을 Stream으로 변환합니다. 이 Stream은 객체를 다루는 일반적인 스트림입니다.
+
+따라서, `Arrays.stream()`와 `.stream()` 메소드는 모두 스트림을 생성하는 데 사용되지만, 사용하는 대상(배열 또는 컬렉션)에 따라 적절한 메소드를 선택해야 합니다.
+
+Java 8의 Stream API를 사용하여 int 배열을 String 배열로 변환하는 방법은 다음과 같습니다:
+
+```java
+import java.util.Arrays;
+
+public class Main {
+    public static void main(String[] args) {
+        int[] intArray = {1, 2, 3, 4, 5};
+        String[] strArray = Arrays.stream(intArray)
+                                  .mapToObj(Integer::toString)
+                                  .toArray(String[]::new);
+
+        System.out.println(Arrays.toString(strArray));  // 출력: [1, 2, 3, 4, 5]
+    }
+}
+```
+
+위의 코드는 `Arrays.stream(intArray)`를 호출하여 int 배열을 IntStream으로 변환하고, `mapToObj(Integer::toString)` 메소드를 사용하여 IntStream의 각 요소를 String으로 변환하며, `toArray(String[]::new)` 메소드를 사용하여 String 스트림을 String 배열로 변환합니다.
+
+`Integer::toString` 메소드 참조는 각 int 값을 String으로 변환하는 데 사용되며, `String[]::new` 메소드 참조는 최종 String 배열을 생성하는 데 사용됩니다.
+
+이렇게 하면 int 배열의 각 요소가 그대로 유지되지만, 이 요소들이 이제는 String 형태로 저장된 String 배열을 얻게 됩니다.
+
+## Set
+
+```java
+import java.util.HashSet;
+import java.util.Set;
+
+public class Main {
+    public static void main(String[] args) {
+        Set<String> set = new HashSet<>();
+        set.add("Apple");
+        set.add("Banana");
+        set.add("Cherry");
+        set.add("Apple"); // This will not be added as "Apple" is already in the set
+
+        System.out.println(set); // Outputs: [Apple, Banana, Cherry]
+    }
+}
+```
+
+위의 예시에서 "Apple"은 처음에 한 번 추가되고, 두 번째로 추가될 때는 무시됩니다. 왜냐하면 `Set`은 중복 항목을 허용하지 않기 때문입니다.
+
+**주요 메소드들**
+
+- `add(E e)`: Set에 지정된 요소를 추가합니다. 만약 이미 Set에 요소가 존재한다면, 추가하지 않습니다. 요소가 성공적으로 추가되면 `true`를 반환하고, 그렇지 않으면 `false`를 반환합니다.
+- `remove(Object o)`: Set에서 지정된 요소를 제거합니다. 만약 요소가 성공적으로 제거되면 `true`를 반환하고, 그렇지 않으면 `false`를 반환합니다.
+- `contains(Object o)`: Set이 지정된 요소를 포함하고 있는지 확인합니다. 요소가 Set에 있다면 `true`를 반환하고, 그렇지 않으면 `false`를 반환합니다.
+- `size()`: Set의 크기(요소의 수)를 반환합니다.
+- `isEmpty()`: Set이 비어있는지 확인합니다. Set이 비어있다면 `true`를 반환하고, 그렇지 않으면 `false`를 반환합니다.
+- `clear()`: Set에서 모든 요소를 제거합니다.
+- `iterator()`: Set에서 반복자를 반환합니다. 반복자는 Set의 모든 요소를 순회하는 데 사용될 수 있습니다.
+- `toArray()`: Set의 모든 요소를 포함하는 배열을 반환합니다. 이 배열은 Set에서 제공하는 순서를 유지합니다.
+- `equals(Object o)`: 현재 Set와 지정된 객체가 같은지 확인합니다.
+- `hashCode()`: Set의 해시 코드 값을 반환합니다.
+
+위의 메소드들은 `Set` 인터페이스를 구현하는 모든 클래스(`HashSet`, `LinkedHashSet`, `TreeSet` 등)에서 사용할 수 있습니다.
+
+## Map
+
+```java
+import java.util.HashMap;
+
+public class Main {
+    public static void main(String[] args) {
+        String[] array = {"apple", "banana", "apple", "orange", "banana", "banana"};
+        HashMap<String, Integer> countMap = new HashMap<>();
+
+        for (String item : array) {
+            // HashMap의 getOrDefault 메서드를 사용하여 해당 아이템의 현재 카운트를 가져오거나, 
+            // 아이템이 처음 나온 경우에는 기본값으로 0을 사용합니다.
+            Integer count = countMap.getOrDefault(item, 0);
+            countMap.put(item, count + 1);
+        }
+
+        for (String key : countMap.keySet()) {
+            System.out.println(key + ": " + countMap.get(key));
+        }
+    }
+}
+
+```
+
+1. `put(K key, V value)`: 지정된 키에 지정된 값을 이 맵에 저장합니다. 이 맵이 이미 해당 키의 매핑을 포함하고 있으면, 이전 값을 새 값으로 대체합니다.
+2. `get(Object key)`: 지정된 키에 매핑된 값을 반환합니다. 키에 대한 매핑이 없을 경우 null을 반환합니다.
+3. `remove(Object key)`: 지정된 키에 매핑된 항목을 삭제합니다. 삭제된 값을 반환합니다.
+4. `containsKey(Object key)`: 이 맵이 지정된 키의 매핑을 포함하고 있는지 확인합니다.
+5. `containsValue(Object value)`: 이 맵이 지정된 값을 가진 매핑을 하나 이상 포함하고 있는지 확인합니다.
+6. `size()`: 이 맵에 저장된 키-값 매핑의 수를 반환합니다.
+7. `isEmpty()`: 이 맵이 비어있는 경우 `true`를 반환합니다.
+8. `clear()`: 이 맵의 모든 매핑을 삭제합니다.
+9. `keySet()`: 이 맵에 포함된 키들로 이루어진 `Set` 뷰를 반환합니다.
+10. `values()`: 이 맵에 포함된 값들로 이루어진 `Collection` 뷰를 반환합니다.
+11. `entrySet()`: 이 맵에 포함된 매핑들로 이루어진 `Set` 뷰를 반환합니다.
+12. `getOrDefault(Object key, V defaultValue)`: 지정된 키에 매핑된 값을 반환하거나, 매핑이 없을 경우 디폴트 값을 반환합니다.
+
+### Integer & int
+
+`HashMap`에서는 `int` 대신 `Integer`를 사용하는 이유는 기본적으로 자바의 컬렉션 클래스들이 기본 데이터 타입 (int, double, boolean 등)을 직접적으로 지원하지 않기 때문입니다. 이들은 오직 객체만을 저장할 수 있습니다. 그래서 우리는 `Integer`, `Double`, `Boolean` 등의 wrapper 클래스를 사용합니다.
+
+`Integer`는 `int`의 wrapper 클래스로서 `null` 값을 가질 수 있는 특징이 있습니다. 이는 아직 값을 할당받지 않은 상태를 표현하는 데 유용합니다.
+
+그래서 `HashMap`에서 `get` 메서드를 호출하면, 값이 있을 경우 해당 `Integer` 객체를 반환하고, 값이 없을 경우 `null`을 반환합니다. 이렇게 `null`을 반환하는 기능을 활용하여 `getOrDefault` 메서드에서 기본값을 설정할 수 있게 되는 것입니다.
+
+자바의 Auto-boxing과 Unboxing 특징으로 인해 우리는 `int`와 `Integer`를 자유롭게 서로 변환하여 사용할 수 있습니다. `Integer`를 `int`로 자동 변환하는 것을 unboxing이라 하며, 반대로 `int`를 `Integer`로 변환하는 것을 auto-boxing이라 합니다. 그래서 `int`와 `Integer`가 서로 변환이 가능해집니다.
+
+아래 코드에서,
+
+```java
+Integer count = countMap.getOrDefault(item, 0);
+
+```
+
+우리는 `0`이라는 기본값(`int`)를 제공하고 있지만, 이것이 `Integer`로 자동 변환되어 `count`에 할당됩니다. 이는 자바의 auto-boxing 덕분입니다.
+
+ 자바의 제네릭(Generic)은 클래스 또는 인터페이스의 내부에서 사용할 데이터 타입을 외부에서 지정하는 기법을 말합니다. 제네릭은 클래스나 메소드에서 사용할 내부 데이터 타입을 컴파일 시에 미리 지정하는 방식으로, 타입 안정성을 제공하고 형변환 번거로움을 줄여줍니다.
+
+그러나 제네릭은 기본 데이터 타입을 허용하지 않습니다. 따라서 `int`, `char`, `boolean` 등과 같은 기본 데이터 타입 대신 해당 타입들의 래퍼 클래스를 사용해야 합니다. 예를 들어 `int`의 경우 `Integer`, `char`의 경우 `Character`, `boolean`의 경우 `Boolean` 등을 사용해야 합니다.
+
+따라서 아래와 같은 제네릭 사용은 오류를 발생시킵니다:
+
+```java
+List<int> list = new ArrayList<>(); // 잘못된 코드
+
+```
+
+대신 다음과 같이 래퍼 클래스를 사용해야 합니다:
+
+```java
+List<Integer> list = new ArrayList<>(); // 올바른 코드
+
+```
+
+## Node 클래스화
 
 ```java
 public class ListNode {
@@ -103,7 +318,22 @@ public class ListNode {
     }  // 생성자
 }
 
+
 ```
+
+```java
+class Node {
+    int x;
+    int y;
+
+    Node(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+```
+
+
 
 ```java
 public class TreeNode {
@@ -118,7 +348,60 @@ public class TreeNode {
 
 ```
 
-### Queue
+## Stack
+
+1. `push(E item)`: 스택의 맨 위(맨 마지막 위치)에 요소를 추가합니다. 추가된 요소를 반환합니다.
+2. `pop()`: 스택의 맨 위에 있는 요소를 제거하고 그 요소를 반환합니다. 스택이 비어 있을 경우, `EmptyStackException`이 발생합니다.
+3. `peek()`: 스택의 맨 위에 있는 요소를 제거하지 않고 반환합니다. 스택이 비어 있을 경우, `EmptyStackException`이 발생합니다.
+4. `empty()`: 스택이 비어 있으면 `true`를, 그렇지 않으면 `false`를 반환합니다.
+5. `search(Object o)`: 스택에서 주어진 객체를 찾아 그 위치를 반환합니다. 스택의 맨 위부터 아래로 탐색하며, 맨 위는 1로 시작합니다. 객체가 스택에 없으면 `-1`을 반환합니다.
+6. `size()`: 스택에 있는 요소의 개수를 반환합니다.
+
+이러한 메소드들을 사용하면 스택에 있는 요소를 추가, 제거, 조회하는 등의 작업을 할 수 있습니다. 스택은 LIFO(Last In First Out) 원칙에 따라 동작하기 때문에, `push()`로 추가한 마지막 요소가 `pop()` 또는 `peek()`을 통해 먼저 접근하거나 제거되는 점을 기억하시면 됩니다.
+
+```java
+import java.util.Stack;
+
+public class StackExample {
+    public static void main(String[] args) {
+        // Stack 생성
+        Stack<Integer> stack = new Stack<Integer>();
+
+        // push(): 요소 추가
+        stack.push(1);
+        stack.push(2);
+        stack.push(3);
+
+        System.out.println("Initial Stack: " + stack);
+
+        // pop(): 요소 제거 및 반환
+        int removedElement = stack.pop();
+        System.out.println("Popped element: " + removedElement);
+        System.out.println("Stack after pop: " + stack);
+
+        // peek(): 맨 위의 요소 조회
+        int top = stack.peek();
+        System.out.println("Current top element: " + top);
+
+        // empty(): 스택이 비어있는지 확인
+        boolean isEmpty = stack.empty();
+        System.out.println("Is the stack empty? " + isEmpty);
+
+        // search(): 요소 위치 찾기
+        int position = stack.search(2);
+        System.out.println("Position of 2: " + position);
+
+        // size(): 스택의 크기 확인
+        int size = stack.size();
+        System.out.println("Size of stack: " + size);
+    }
+}
+
+```
+
+
+
+## Queue
 
 Queue 인터페이스의 주요 메서드에는 다음과 같은 것들이 있습니다:
 
@@ -145,7 +428,7 @@ public class Main {
 
 ```
 
-### map
+## .map()
 
 ```java
 import java.io.*;
@@ -218,9 +501,7 @@ public class Main {
 
   결론적으로, `mapToInt`와 `toArray`를 함께 사용하면 스트림의 각 요소를 int 값으로 변환하고 이를 int 배열로 모을 수 있습니다. 반면, `map`과 `collect`를 함께 사용하면 스트림의 각 요소를 다른 형태로 변환하고 이를 List나 Set 같은 컬렉션으로 모을 수 있습니다.
 
-
-
-#### lambda
+### lambda
 
 ```java
 import java.util.*;
@@ -246,7 +527,7 @@ public class Main {
 
 ```
 
-### 형 변환
+## 형 변환
 
 `(int)`는 Java에서 형 변환(Type Casting)을 수행하는 문법입니다.
 
@@ -268,7 +549,7 @@ System.out.println(myInt);      // Outputs 9
 
 여기서 `(int)`는 `myDouble`의 값을 `int` 형으로 변환하라는 지시입니다. 이때 `myDouble`의 값 `9.78`에서 소수부분 `.78`이 손실되고, `myInt`는 손실된 값 `9`만을 저장하게 됩니다.
 
-### min
+## min
 
 `.min()`은 Java 8의 Stream API에 포함된 메소드로, 스트림의 요소 중 최소값을 찾습니다. 이 메소드는 OptionalInt 객체를 반환합니다.
 
@@ -293,7 +574,7 @@ public class Main {
 
 ```
 
-### Math.pow()
+## Math.pow()
 
 ```java
 public class Main {
@@ -315,3 +596,22 @@ int min = (int) Math.pow(10, 6);
 
 ```
 
+## ||
+
+
+Java에서 if문에 OR 연산자를 사용하려면 `||` 기호를 사용하면 됩니다.
+
+다음은 그 예시입니다:
+
+```java
+int a = 10;
+int b = 20;
+
+if (a > 15 || b > 15) {
+    System.out.println("Either a or b is greater than 15");
+}
+```
+
+위 코드에서 `a > 15 || b > 15`는 "a가 15보다 크거나(bigger than) 또는(or) b가 15보다 크다"는 논리적인 표현입니다. a나 b 둘 중 하나라도 이 조건을 만족하면 if문의 본문이 실행됩니다.
+
+이와 같이 `||`는 OR 연산을 나타내는 논리 연산자입니다. OR 연산은 둘 중 하나 이상의 피연산자가 참일 때 참을 반환합니다.
