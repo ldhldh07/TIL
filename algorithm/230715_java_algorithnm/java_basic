@@ -43,10 +43,18 @@ public class Main {
 
 `        ArrayList<Integer> list = new ArrayList<Integer>(); // Integer 타입의 ArrayList를 생성합니다.`
 
-- `add(E element)`: 리스트의 끝에 지정된 요소를 추가합니다.
-- `get(int index)`: 리스트에서 지정된 위치에 있는 요소를 반환합니다.
-- `remove(int index)`: 리스트에서 지정된 위치에 있는 요소를 제거합니다.
-- `size()`: 리스트의 크기(요소의 수)를 반환합니다.
+- `add(E e)`: 리스트의 끝에 지정된 요소를 추가합니다.
+- `add(int index, E element)`: 리스트의 지정된 위치에 특정 요소를 삽입합니다.
+- `clear()`: 리스트에서 모든 요소를 제거합니다.
+- `contains(Object o)`: 리스트가 특정 요소를 포함하고 있는지 확인합니다.
+- `get(int index)`: 리스트의 지정된 위치에 있는 요소를 반환합니다.
+- `indexOf(Object o)`: 지정된 요소가 리스트에서 처음으로 나타나는 위치의 인덱스를 반환합니다.
+- `isEmpty()`: 리스트가 비어 있는지 확인합니다.
+- `remove(Object o)`: 리스트에서 첫 번째로 나타나는 특정 요소를 제거합니다.
+- `remove(int index)`: 리스트에서 지정된 위치의 요소를 제거합니다.
+- `size()`: 리스트의 요소 수를 반환합니다.
+- `set(int index, E element)`: 리스트의 지정된 위치에 있는 요소를 지정된 요소로 대체합니다.
+- `toArray()`: 리스트의 모든 요소를 포함하는 배열을 반환합니다.
 
 ```java
 import java.util.ArrayList;
@@ -194,6 +202,125 @@ public class Main {
 `Integer::toString` 메소드 참조는 각 int 값을 String으로 변환하는 데 사용되며, `String[]::new` 메소드 참조는 최종 String 배열을 생성하는 데 사용됩니다.
 
 이렇게 하면 int 배열의 각 요소가 그대로 유지되지만, 이 요소들이 이제는 String 형태로 저장된 String 배열을 얻게 됩니다.
+
+### ArrayList랑 배열 차이
+
+ArrayList와 배열(Type[])은 Java에서 데이터를 저장하고 처리하는 두 가지 주요 방법입니다. 이 둘의 주요 차이점은 다음과 같습니다:
+
+1. 크기: 배열은 고정 길이를 가지므로 한 번 생성하면 크기를 변경할 수 없습니다. 반면에 ArrayList는 동적이며 요소가 추가되거나 제거될 때 자동으로 크기가 조정됩니다.
+2. 유형: 배열은 기본 데이터 유형(int, char 등)과 객체를 모두 저장할 수 있습니다. 반면에 ArrayList는 객체만 저장할 수 있으며 기본 데이터 유형을 저장하려면 해당 wrapper 클래스(Integer, Character 등)를 사용해야 합니다.
+3. 성능: 배열은 ArrayList보다 접근 속도가 빠르며 메모리 효율성이 더 높습니다. 이는 배열이 런타임에 크기가 변하지 않기 때문입니다. 반면에 ArrayList는 더 많은 메모리를 사용하며 요소를 추가하거나 제거할 때마다 크기를 조정해야 하므로 배열보다 덜 효율적입니다.
+4. 편의성: ArrayList는 자체적으로 add, remove, contains 등의 메서드를 가지고 있어 배열보다 훨씬 더 편리하게 사용할 수 있습니다.
+5. 다차원: 배열은 다차원 배열을 쉽게 만들 수 있지만, ArrayList에서는 다차원 배열을 직접적으로 만드는 것이 불가능합니다. 다차원 구조를 만들기 위해서는 ArrayList의 ArrayList를 만들어야 합니다.
+
+즉, 배열과 ArrayList는 서로 다른 용도로 사용됩니다. 어떤 것을 사용할지는 사용 사례에 따라 결정됩니다. 크기가 변하지 않고 성능이 중요한 경우 배열을 사용하고, 데이터의 크기가 동적으로 변하거나 데이터 조작 기능이 필요한 경우 ArrayList를 사용하게 됩니다.
+
+배열: 배열은 기본 데이터 유형 및 객체 모두를 저장할 수 있습니다. 예를 들어, 정수, 문자, 불린, 실수와 같은 기본 유형뿐만 아니라 사용자 정의 클래스의 인스턴스 등도 배열에 저장할 수 있습니다.
+
+```java
+int[] intArray = new int[10]; // 기본 데이터 유형
+String[] strArray = new String[10]; // 객체
+```
+
+ArrayList: ArrayList는 객체만 저장할 수 있습니다. 따라서 기본 유형을 저장하려면 해당 기본 유형의 래퍼 클래스를 사용해야 합니다. 예를 들어, Integer는 int의 래퍼 클래스이고, Double은 double의 래퍼 클래스입니다.
+
+```java
+ArrayList<Integer> arrayList = new ArrayList<>(); // 기본 데이터 유형의 래퍼 클래스
+ArrayList<String> strArrayList = new ArrayList<>(); // 객체
+```
+
+이런 특성 때문에 기본 유형을 저장하는 데는 배열이 메모리 사용 면에서 효율적일 수 있지만, 배열의 크기는 변경할 수 없으므로 데이터 집합의 크기가 동적으로 변하는 경우에는 ArrayList를 사용하는 것이 더 편리할 수 있습니다.
+
+또한, Java 5부터는 '오토박싱'과 '언박싱' 기능을 지원하여 기본 데이터 유형과 해당 래퍼 클래스 간의 변환을 자동으로 처리해줍니다. 이로 인해 ArrayList에 기본 데이터 유형을 저장하거나 불러올 때, 개발자는 이 변환 과정을 명시적으로 코드에 쓸 필요가 없어져서 편리해졌습니다.
+
+예를 들어, 다음 코드는 int 값을 ArrayList에 저장하는 과정을 보여줍니다. 이 때, 컴파일러가 int 값을 자동으로 Integer로 변환해주는 오토박싱 과정이 일어납니다.
+
+```java
+ArrayList<Integer> list = new ArrayList<>();
+int num = 5;
+list.add(num); // 오토박싱: 컴파일러가 num을 Integer로 자동 변환
+```
+
+이와 유사하게, Integer 객체를 int로 변환하는 언박싱 과정도 자동으로 일어납니다.
+
+```java
+int retrievedNum = list.get(0); // 언박싱: 컴파일러가 Integer 객체를 int로 자동 변환
+```
+
+### ArrayList랑 배열 각각 정렬하기
+
+
+Java에서 ArrayList와 int[] 배열을 정렬하는 방법은 다음과 같습니다.
+
+1. ArrayList 정렬하기
+
+Collections.sort() 메소드를 사용하여 ArrayList를 정렬할 수 있습니다.
+
+```java
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Main {
+    public static void main(String[] args) {
+        ArrayList<Integer> arrayList = new ArrayList<>();
+        arrayList.add(5);
+        arrayList.add(9);
+        arrayList.add(1);
+        arrayList.add(6);
+
+        Collections.sort(arrayList);
+
+        for (int num : arrayList) {
+            System.out.println(num);
+        }
+    }
+}
+```
+
+이 코드는 arrayList의 요소들을 오름차순으로 정렬합니다.
+
+1. int[] 배열 정렬하기
+
+Arrays.sort() 메소드를 사용하여 int[] 배열을 정렬할 수 있습니다.
+
+```java
+import java.util.Arrays;
+
+public class Main {
+    public static void main(String[] args) {
+        int[] array = {5, 9, 1, 6};
+
+        Arrays.sort(array);
+
+        for (int num : array) {
+            System.out.println(num);
+        }
+    }
+}
+```
+
+이 코드는 array의 요소들을 오름차순으로 정렬합니다.
+
+## ArrayList랑 배열 길이
+
+다음은 배열의 길이를 알아내는 예시입니다:
+
+```java
+int[] array = new int[10]; // 길이가 10인 배열 생성
+System.out.println(array.length); // 10 출력
+```
+
+반면에 `ArrayList`와 같은 컬렉션 클래스에서는 `.size()` 메서드를 사용하여 요소의 수를 알아낼 수 있습니다. 이는 동적으로 변경되는 데이터 구조에서 요소의 수를 알아내는 데 사용됩니다.
+
+```java
+ArrayList<Integer> list = new ArrayList<>(); // ArrayList 생성
+list.add(1);
+list.add(2);
+list.add(3);
+System.out.println(list.size()); // 3 출력
+```
+
+따라서 배열과 ArrayList는 요소의 수를 알아내는 방식이 서로 다르다는 것을 알 수 있습니다. 이는 배열이 고정 길이의 데이터 구조이고, ArrayList는 동적으로 크기가 변하는 데이터 구조라는 점에서 기인합니다.
 
 ## Set
 
@@ -615,3 +742,548 @@ if (a > 15 || b > 15) {
 위 코드에서 `a > 15 || b > 15`는 "a가 15보다 크거나(bigger than) 또는(or) b가 15보다 크다"는 논리적인 표현입니다. a나 b 둘 중 하나라도 이 조건을 만족하면 if문의 본문이 실행됩니다.
 
 이와 같이 `||`는 OR 연산을 나타내는 논리 연산자입니다. OR 연산은 둘 중 하나 이상의 피연산자가 참일 때 참을 반환합니다.
+
+## StringBuilder
+
+`StringBuilder`는 자바의 `java.lang` 패키지에 있는 클래스로, 문자열을 수정하거나 조작하는 연산을 수행할 때 사용합니다. 기본적으로 자바에서 문자열은 불변(Immutable)하기 때문에, 문자열에 대한 수정 연산이 빈번하게 일어나는 경우 매번 새로운 문자열 객체가 생성되어 메모리 사용이 비효율적일 수 있습니다. `StringBuilder`는 이러한 문제를 해결하기 위해 도입되었습니다.
+
+`StringBuilder`는 내부적으로 변경 가능한 문자열을 관리하므로, 문자열에 대한 여러 조작을 수행해도 새로운 객체를 생성하지 않습니다. 따라서 대량의 문자열 조작이 필요한 경우 `StringBuilder`를 사용하면 훨씬 더 효율적인 코드를 작성할 수 있습니다.
+
+아래는 `StringBuilder`의 사용 예시입니다:
+
+```java
+StringBuilder sb = new StringBuilder();
+
+sb.append("Hello, ");
+sb.append("World!");
+
+System.out.println(sb.toString());  // 출력: Hello, World!
+```
+
+위 코드에서는 먼저 `StringBuilder` 객체를 생성하고, `append()` 메소드를 사용해 문자열을 추가합니다. 마지막으로 `toString()` 메소드를 이용해 최종적인 문자열을 얻습니다. 이렇게 `StringBuilder`를 이용하면 여러 개의 문자열을 연결하는 작업을 효율적으로 수행할 수 있습니다.
+
+또한, `StringBuilder`는 `insert()`, `delete()`, `reverse()` 등의 메소드를 제공하여 문자열에 대한 다양한 조작을 지원합니다.
+
+자바의 `String`은 불변(immutable) 객체입니다. 따라서 `String` 객체에 어떤 변경을 가하면, 원본 문자열을 수정하는 것이 아니라 새로운 `String` 객체를 생성합니다. 이렇게 문자열 연산을 여러 번 수행하면 많은 `String` 객체가 생성되고 이는 메모리 사용에 비효율적이 됩니다.
+
+반면, `StringBuilder`는 가변(mutable) 객체로 설계되어 있어, 한번 생성된 `StringBuilder` 객체에 계속해서 문자열을 추가하거나 변경하는 것이 가능합니다. 그래서 문자열의 연결 등을 반복하는 작업에 있어서는 `StringBuilder`를 사용하는 것이 메모리와 연산 시간 면에서 더 효율적입니다.
+
+그러나 이러한 특징이 항상 더 좋은 성능을 보장하는 것은 아닙니다. 예를 들어, 문자열 연결 연산이 몇 번 되지 않는다면, `StringBuilder`를 사용하는 것보다 그냥 `+` 연산자를 사용하는 것이 코드가 더 간결하고 이해하기 쉬울 수 있습니다.
+
+따라서 상황에 따라 적절한 방법을 선택하는 것이 중요합니다.
+
+## this
+
+자바에서 `this` 키워드는 클래스 안에서 현재 인스턴스(오브젝트)를 참조하기 위해 사용됩니다. `this`를 사용하면 클래스의 메서드나 생성자에서 현재 인스턴스의 변수를 참조하거나 다른 메서드를 호출할 수 있습니다. `this`의 주요 사용 사례는 다음과 같습니다:
+
+1. **현재 클래스의 인스턴스 변수를 참조하기 위해**: `this`는 현재 클래스의 인스턴스 변수를 참조하는 데 사용됩니다. 메서드나 생성자의 매개 변수 이름이 클래스의 인스턴스 변수 이름과 같을 때, 이는 혼란을 줄 수 있습니다. 이런 경우, `this` 키워드는 인스턴스 변수와 로컬 변수를 구분하는 데 사용됩니다.
+
+   예시:
+
+   ```java
+   public class Person {
+       private String name;
+   
+       public Person(String name) {
+           this.name = name;  // Here, 'this' is used to refer to the instance variable 'name'
+       }
+   }
+   ```
+
+2. **현재 클래스의 메서드를 호출하기 위해**: `this`는 현재 클래스의 메서드를 호출하는 데도 사용될 수 있습니다.
+
+   예시:
+
+   ```java
+   public class Calculator {
+       private int result;
+   
+       public void add(int value) {
+           this.result += value;  // Here, 'this' is used to call the method 'add'
+       }
+   }
+   ```
+
+3. **현재 클래스의 생성자를 호출하기 위해**: `this()`를 사용하여 같은 클래스의 다른 생성자를 호출할 수 있습니다.
+
+   예시:
+
+   ```java
+   public class Rectangle {
+       private int width;
+       private int height;
+   
+       public Rectangle() {
+           this(1, 1);  // Here, 'this' is used to call another constructor
+       }
+   
+       public Rectangle(int width, int height) {
+           this.width = width;
+           this.height = height;
+       }
+   }
+   ```
+
+이처럼 `this` 키워드는 클래스 내부에서 현재 인스턴스를 참조하는 매우 중요한 방법입니다.
+
+## @Override
+
+자바에서 메소드 오버라이딩은 부모 클래스에서 이미 제공하는 메소드를 자식 클래스에서 재정의하여 사용하는 것을 말합니다. 이를 통해 자식 클래스는 부모 클래스의 메소드를 자신의 요구에 맞게 변경할 수 있습니다.
+
+다음은 메소드 오버라이딩을 사용하는 간단한 예시입니다:
+
+```java
+// 부모 클래스
+public class Animal {
+    public void sound() {
+        System.out.println("The animal makes a sound");
+    }
+}
+
+// 자식 클래스
+public class Cat extends Animal {
+    @Override
+    public void sound() {
+        System.out.println("The cat meows");
+    }
+}
+
+// 메인 클래스
+public class Main {
+    public static void main(String[] args) {
+        Animal myAnimal = new Animal();  // Create an Animal object
+        Animal myCat = new Cat();  // Create a Cat object
+
+        myAnimal.sound();  // Outputs "The animal makes a sound"
+        myCat.sound();  // Outputs "The cat meows"
+    }
+}
+```
+
+위 코드에서, `Cat` 클래스는 `Animal` 클래스를 상속받아 `sound()` 메소드를 오버라이딩하고 있습니다. 이 때문에 `Cat` 객체에서 `sound()` 메소드를 호출하면 "The cat meows"라는 메시지가 출력됩니다.
+
+`@Override` 어노테이션은 컴파일러에게 이 메소드가 부모 클래스의 메소드를 오버라이딩하고 있다는 것을 알려줍니다. 이 어노테이션을 사용하면 컴파일러가 오버라이딩 메소드의 이름, 파라미터 타입, 반환 타입이 부모 클래스의 메소드와 일치하는지 확인하므로 실수를 방지하는 데 도움이 됩니다.
+
+
+
+자바에서 메소드를 오버라이딩할 때는 몇 가지 규칙이 있습니다. 오버라이딩의 기본적인 조건은 다음과 같습니다:
+
+1. **메소드 이름이 같아야 합니다**: 부모 클래스의 메소드와 같은 이름의 메소드를 자식 클래스에서 정의해야 합니다.
+2. **메소드 매개변수가 같아야 합니다**: 부모 클래스의 메소드와 자식 클래스의 메소드가 같은 타입과 개수의 매개변수를 가져야 합니다. 이를 메소드 시그니처라고 부르며, 오버라이딩할 때는 이 시그니처가 부모와 자식 클래스에서 동일해야 합니다.
+3. **반환 타입이 같아야 합니다**: 부모 클래스의 메소드와 동일한 반환 타입을 가져야 합니다. 단, Java 5부터는 공변 반환 타입이 도입되어, 오버라이딩 메소드의 반환 타입이 부모 클래스 메소드의 반환 타입의 서브 타입이어도 허용됩니다.
+4. **접근 수준이 같거나 더 넓어야 합니다**: 오버라이딩 메소드의 접근 제어자는 부모 클래스의 메소드와 같거나 더 넓은 범위로 설정해야 합니다. 예를 들어, 부모 클래스의 메소드가 `protected`로 선언되었다면, 오버라이딩 메소드는 `protected`나 `public`으로 선언해야 합니다.
+5. **부모 클래스의 메소드가 final이 아니어야 합니다**: `final` 키워드가 붙은 메소드는 오버라이딩할 수 없습니다.
+6. **부모 클래스의 메소드가 static이 아니어야 합니다**: `static` 메소드는 클래스 레벨에서 작동하므로 오버라이딩할 수 없습니다. `static` 메소드를 자식 클래스에서 같은 이름으로 다시 정의하는 것은 메소드 히딩(Method Hiding)이라고 합니다.
+
+이런 조건을 지키면서 메소드를 오버라이딩하면, 부모 클래스의 메소드를 자식 클래스가 필요에 맞게 재정의하여 사용할 수 있습니다.
+
+### super
+
+
+자바에서 `super` 키워드는 자식 클래스에서 부모 클래스로 접근할 때 사용됩니다. `super`는 주로 두 가지 방식으로 사용됩니다:
+
+1. **부모 클래스의 메소드를 호출하는데 사용**될 수 있습니다. 이는 자식 클래스에서 메소드를 오버라이딩했지만 부모 클래스의 원래 메소드를 여전히 호출해야 할 때 유용합니다.
+
+```java
+public class ParentClass {
+    public void display() {
+        System.out.println("This is the parent class display method");
+    }
+}
+
+public class ChildClass extends ParentClass {
+    public void display() {
+        System.out.println("This is the child class display method");
+    }
+
+    public void callParentDisplay() {
+        super.display();
+    }
+}
+
+// 메인 클래스
+public class Main {
+    public static void main(String[] args) {
+        ChildClass child = new ChildClass();
+        child.display();  // 출력: "This is the child class display method"
+        child.callParentDisplay();  // 출력: "This is the parent class display method"
+    }
+}
+```
+
+위 예시에서, `ChildClass`의 `callParentDisplay` 메소드는 `super.display();`를 사용하여 부모 클래스의 `display` 메소드를 호출합니다.
+
+1. **부모 클래스의 생성자를 호출하는데 사용**될 수 있습니다. 자식 클래스의 생성자에서는 첫 번째 명령문으로 부모 클래스의 생성자를 호출할 수 있습니다.
+
+```java
+public class ParentClass {
+    public ParentClass() {
+        System.out.println("ParentClass constructor called");
+    }
+}
+
+public class ChildClass extends ParentClass {
+    public ChildClass() {
+        super();  // 부모 클래스의 생성자를 호출합니다.
+        System.out.println("ChildClass constructor called");
+    }
+}
+
+// 메인 클래스
+public class Main {
+    public static void main(String[] args) {
+        ChildClass child = new ChildClass();
+        // 출력: "ParentClass constructor called"
+        // 출력: "ChildClass constructor called"
+    }
+}
+```
+
+위 예시에서, `ChildClass`의 생성자는 `super();`를 사용하여 부모 클래스인 `ParentClass`의 생성자를 호출합니다.
+
+따라서 `super`는 자식 클래스에서 부모 클래스의 메소드나 생성자를 명시적으로 호출할 때 사용하는 키워드입니다.
+
+## final
+
+자바에서 `final` 키워드는 "변경 불가능"이라는 의미를 가집니다. `final`은 변수, 메소드, 클래스에 사용될 수 있으며, 각각의 경우에 다음과 같은 의미를 가집니다:
+
+1. **Final 변수**: `final` 변수는 한 번 초기화되면 그 값을 변경할 수 없습니다. 즉, `final` 변수는 상수(constant)로 간주됩니다. 예를 들어, `final int MAX_SPEED = 100;`은 MAX_SPEED 값을 나중에 변경할 수 없음을 의미합니다.
+2. **Final 메소드**: `final` 메소드는 서브 클래스에서 오버라이드(재정의)할 수 없습니다. 이는 기능의 확장을 제한하고, 특정 메소드가 서브 클래스에서 변경되는 것을 막는데 사용됩니다.
+3. **Final 클래스**: `final` 클래스는 상속할 수 없습니다. 즉, 다른 클래스가 `final` 클래스를 확장하려고 하면 컴파일 에러가 발생합니다. 이는 클래스의 설계를 변경하지 못하게 하는 효과가 있습니다. `java.lang.String` 클래스는 가장 잘 알려진 `final` 클래스의 예입니다.
+
+`final` 키워드는 프로그래밍에서 불변성(immutability)을 확보하고, 코드의 안정성과 보안성을 높이는데 도움이 됩니다.
+
+자바에서 `final` 키워드는 "변경 불가능"이라는 의미를 가집니다. `final`은 변수, 메소드, 클래스에 사용될 수 있으며, 각각의 경우에 다음과 같은 의미를 가집니다:
+
+1. **Final 변수**: `final` 변수는 한 번 초기화되면 그 값을 변경할 수 없습니다. 즉, `final` 변수는 상수(constant)로 간주됩니다. 예를 들어, `final int MAX_SPEED = 100;`은 MAX_SPEED 값을 나중에 변경할 수 없음을 의미합니다.
+2. **Final 메소드**: `final` 메소드는 서브 클래스에서 오버라이드(재정의)할 수 없습니다. 이는 기능의 확장을 제한하고, 특정 메소드가 서브 클래스에서 변경되는 것을 막는데 사용됩니다.
+3. **Final 클래스**: `final` 클래스는 상속할 수 없습니다. 즉, 다른 클래스가 `final` 클래스를 확장하려고 하면 컴파일 에러가 발생합니다. 이는 클래스의 설계를 변경하지 못하게 하는 효과가 있습니다. `java.lang.String` 클래스는 가장 잘 알려진 `final` 클래스의 예입니다.
+
+`final` 키워드는 프로그래밍에서 불변성(immutability)을 확보하고, 코드의 안정성과 보안성을 높이는데 도움이 됩니다.
+
+
+
+`final` 키워드의 사용 예시는 다음과 같습니다:
+
+1. **Final 변수**:
+
+   ```java
+   public class Circle {
+       final double PI = 3.14159;
+       double radius;
+   
+       public Circle(double radius) {
+           this.radius = radius;
+       }
+   
+       double calculateArea() {
+           return PI * radius * radius;  // PI 값을 변경할 수 없습니다.
+       }
+   }
+   ```
+
+   위 예시에서 `PI`는 `final` 변수로 선언되어 있어 한 번 초기화된 후에는 그 값을 변경할 수 없습니다.
+
+2. **Final 메소드**:
+
+   ```java
+   public class Vehicle {
+       public final void startEngine() {
+           System.out.println("Starting engine...");
+           // 이 메소드는 자식 클래스에서 오버라이드 할 수 없습니다.
+       }
+   }
+   
+   public class Car extends Vehicle {
+       @Override
+       public void startEngine() {  // 컴파일 에러
+           System.out.println("Starting car engine...");
+       }
+   }
+   ```
+
+   위 예시에서 `startEngine` 메소드는 `final`로 선언되어 있어서, `Car` 클래스에서 이를 오버라이드하려고 하면 컴파일 에러가 발생합니다.
+
+3. **Final 클래스**:
+
+   ```java
+   public final class FinalClass {
+       // 코드..
+   }
+   
+   public class SomeClass extends FinalClass {  // 컴파일 에러
+       // 코드..
+   }
+   ```
+
+   위 예시에서 `FinalClass`는 `final` 클래스로 선언되어 있어서, 이를 상속하려는 `SomeClass`는 컴파일 에러를 발생시킵니다.
+
+이처럼 `final` 키워드는 변수, 메소드, 클래스의 변경을 제한하는 데 사용됩니다.
+
+## static
+
+자바에서 `static` 키워드는 특정 멤버(변수, 메소드, 초기화 블록 등)가 객체(인스턴스)에 속하는 것이 아니라 클래스에 속하게 만듭니다. 즉, `static` 키워드가 붙은 멤버는 클래스 레벨에서 작동하며, 모든 인스턴스가 공유합니다.
+
+1. **Static 변수**: `static` 변수(또는 클래스 변수)는 클래스에 속하며, 모든 인스턴스에서 이 변수를 공유합니다. `static` 변수는 클래스가 메모리에 로드될 때 한 번만 초기화되며, 클래스당 하나의 복사본만 있습니다.
+
+   예시:
+
+   ```java
+   public class MyStaticClass {
+       static int staticVar = 0;
+   
+       MyStaticClass() {
+           staticVar++;
+       }
+   
+       void printStaticVar() {
+           System.out.println(staticVar);
+       }
+   }
+   
+   // 사용 예시
+   MyStaticClass obj1 = new MyStaticClass();
+   obj1.printStaticVar();  // 출력: 1
+   
+   MyStaticClass obj2 = new MyStaticClass();
+   obj2.printStaticVar();  // 출력: 2
+   ```
+
+   위 예시에서 `staticVar`는 `static`으로 선언된 변수이므로, `MyStaticClass`의 모든 인스턴스에서 공유됩니다.
+
+2. **Static 메소드**: `static` 메소드(또는 클래스 메소드)는 클래스에 속하며, 객체의 생성 없이 호출할 수 있습니다. `static` 메소드는 `static` 변수나 다른 `static` 메소드만 접근할 수 있습니다.
+
+   예시:
+
+   ```java
+   public class MyStaticClass {
+       static int staticVar = 0;
+   
+       static void incrementStaticVar() {
+           staticVar++;
+       }
+   
+       static void printStaticVar() {
+           System.out.println(staticVar);
+       }
+   }
+   
+   // 사용 예시
+   MyStaticClass.incrementStaticVar();
+   MyStaticClass.printStaticVar();  // 출력: 1
+   ```
+
+   위 예시에서 `incrementStaticVar`와 `printStaticVar` 메소드는 `static`으로 선언되어 있으므로 객체의 생성 없이 직접 호출할 수 있습니다.
+
+3. **Static 초기화 블록**: `static` 초기화 블록은 클래스가 JVM에 의해 로드될 때 한 번만 실행됩니다. 이 블록은 복잡한 `static` 변수의 초기화 또는 다른 `static` 초기화 작업에 사용됩니다.
+
+   예시:
+
+   ```java
+   public class MyStaticClass {
+       static int staticVar;
+   
+       // Static initialization block
+       static {
+           staticVar = doComplexCalculation();
+       }
+   
+       static int doComplexCalculation() {
+           // 복잡한 계산 코드...
+           return result;
+       }
+   }
+   ```
+
+   위 예시에서 `static` 초기화 블록은 `staticVar`를 복잡한 계산 결과로 초기화하는 데 사용됩니다.
+
+4. **Static 클래스**: `static` 클래스는 바깥 클래스 내부에 선언된 중첩 클래스만 될 수 있습니다. 이는 바깥 클래스와 독립적으로 동작하며, 바깥 클래스의 비-`static` 멤버에 접근할 수 없습니다.
+
+   예시:
+
+   ```java
+   public class OuterClass {
+       static int staticVar = 0;
+   
+       static class StaticNestedClass {
+           void incrementStaticVar() {
+               staticVar++;  // Can access static members of outer class
+           }
+       }
+   }
+   ```
+
+   위 예시에서 `StaticNestedClass`는 `static`으로 선언된 중첩 클래스로, 바깥 클래스의 `static` 멤버에 접근할 수 있습니다.
+
+### Overloading
+
+자바에서 오버로딩(Overloading)은 같은 이름의 메소드를 여러 개 가지면서 매개변수의 유형과 개수가 다르도록 하는 기능을 말합니다. 이를 통해 하나의 메소드 이름을 사용하되, 제공하는 매개변수에 따라 다른 작업을 수행할 수 있습니다.
+
+오버로딩의 규칙은 다음과 같습니다:
+
+1. 메소드 이름은 같아야 합니다.
+2. 매개변수의 개수 또는 타입이 달라야 합니다.
+3. 반환 타입은 오버로딩을 구별하는데 사용되지 않습니다.
+
+다음은 오버로딩의 예시입니다:
+
+```java
+public class OverloadingExample {
+
+    void demo (int a) {
+       System.out.println ("a: " + a);
+    }
+
+    void demo (int a, int b) {
+       System.out.println ("a and b: " + a + "," + b);
+    }
+
+    double demo(double a) {
+       System.out.println("double a: " + a);
+       return a*a;
+    }
+}
+
+public class Main {
+    public static void main (String args []) {
+        OverloadingExample obj = new OverloadingExample();
+        double result;
+        obj.demo(10);
+        obj.demo(10, 20);
+        result = obj.demo(5.5);
+        System.out.println("O/P : " + result);
+    }
+}
+```
+
+이 예제에서 `demo` 메소드는 세 번 오버로딩 되었습니다. 첫 번째와 두 번째 `demo` 메소드는 void를 반환하며, 세 번째 `demo` 메소드는 double을 반환합니다. 이들 각각은 매개변수의 개수 또는 타입에 따라 다른 기능을 수행합니다.
+
+## **Package** & Import
+
+`package`는 비슷한 유형의 자바 클래스를 그룹화하는 방법을 제공합니다. 이는 이름 충돌을 방지하고, 코드의 유지 관리와 구조화를 향상시킵니다. 패키지 이름은 모두 소문자로 작성하고, 일반적으로는 도메인 이름을 반대로 사용하여 유니크함을 유지합니다. 예를 들어, "com.example.myapp"이 될 수 있습니다.
+
+`package` 키워드를 사용하여 패키지를 선언합니다. 패키지 선언은 반드시 .java 파일의 첫 번째 문장이어야 합니다.
+
+```java
+package com.example.myapp;
+```
+
+이 코드는 `com.example.myapp` 패키지에 속한 클래스 또는 인터페이스를 선언합니다.
+
+**Import**
+
+다른 패키지에 있는 클래스를 사용하려면 그 클래스의 전체 패키지 이름을 사용해야 합니다. 예를 들어, `java.util` 패키지에 있는 `ArrayList`를 사용하려면 다음과 같이 써야 합니다:
+
+```java
+java.util.ArrayList list = new java.util.ArrayList();
+```
+
+이렇게 긴 이름을 매번 쓰는 것은 번거로울 수 있으므로, 자바는 `import` 문을 제공하여 다른 패키지의 클래스를 쉽게 참조할 수 있게 해줍니다. `import` 문은 소스 파일의 상단에 위치하며, 해당 파일에서 사용할 다른 패키지의 클래스 또는 인터페이스를 지정합니다. 예를 들어:
+
+```java
+import java.util.ArrayList;
+```
+
+이렇게 하면 해당 파일에서는 `ArrayList`를 직접 참조할 수 있습니다:
+
+```java
+ArrayList list = new ArrayList();
+```
+
+모든 클래스를 한 번에 가져오려면 와일드카드(*)를 사용할 수 있습니다:
+
+```java
+import java.util.*;
+```
+
+이렇게 하면 `java.util` 패키지의 모든 클래스를 직접 참조할 수 있습니다.
+
+따라서 `package`는 현재 소스 코드가 어떤 패키지에 속하는지를 나타내며, `import`는 현재 소스 코드에서 다른 패키지의 클래스 또는 인터페이스를 쉽게 사용할 수 있도록 해줍니다.
+
+```java
+package org.opentutorials.javatutorials.packages.example1;
+
+public class A {}
+```
+
+ 아래 코드는 위에서 정의한 클래스 A를 클래스 B에서 사용하는 예제다. 정상적으로 동작한다. 
+
+```java
+package org.opentutorials.javatutorials.packages.example1;  
+
+public class B {    
+    public static void main(String[] args) {        
+        A a = new A();    
+    } 
+} 
+```
+
+예제는 `A` 클래스와 `B` 클래스가 같은 패키지 `org.opentutorials.javatutorials.packages.example1`에 있기 때문에 `B` 클래스에서 `A` 클래스를 직접 사용할 수 있습니다.
+
+패키지 내부에서는 패키지에 속한 모든 클래스를 다른 `import` 구문 없이 바로 사용할 수 있습니다. 이는 동일한 패키지 내에 있는 클래스들이 서로 밀접하게 관련되어 있기 때문에 이렇게 설계되었습니다.
+
+따라서 위의 예제에서 `B` 클래스에서 `A` 클래스를 사용하려면 별도의 `import` 문 없이 `A`의 인스턴스를 바로 생성할 수 있습니다.
+
+```java
+A a = new A();
+```
+
+이렇게 `package` 선언은 해당 클래스가 어떤 패키지에 속하는지를 지정하고, 동일 패키지 내의 다른 클래스를 직접 참조할 수 있게 해줍니다.
+
+반면에, 다른 패키지의 클래스를 사용하려면 `import`를 사용하거나, 클래스의 전체 패키지 이름을 사용해야 합니다. 예를 들어, `org.opentutorials.javatutorials.packages.example2` 패키지에 있는 `C` 클래스를 사용하려면 다음과 같이 해야 합니다.
+
+```java
+import org.opentutorials.javatutorials.packages.example2.C;
+// 또는
+org.opentutorials.javatutorials.packages.example2.C c = new org.opentutorials.javatutorials.packages.example2.C();
+```
+
+## throw
+
+더 자세히 설명하겠습니다.
+
+**throw**
+
+`throw` 키워드는 프로그램에서 특정 조건에서 예외를 명시적으로 발생시키고자 할 때 사용됩니다. 이를 통해 예외 처리 루틴을 즉시 트리거 할 수 있습니다. `throw`는 실제로 예외 객체를 생성하고 이를 던집니다. `throw` 문은 `java.lang.Throwable` 클래스의 인스턴스를 던질 수 있습니다.
+
+다음은 `throw` 사용의 예입니다:
+
+```java
+public void makePayment(double payment) {
+    if (payment <= 0) {
+        throw new IllegalArgumentException("Payment must be positive.");
+    }
+    // Payment processing code...
+}
+```
+
+위의 메소드에서, 입력된 payment 값이 0 이하일 경우 `IllegalArgumentException`을 생성하고 던지며, 이는 일반적으로 프로그램의 다른 부분에서 잡아내어 처리됩니다.
+
+**throws**
+
+`throws` 키워드는 메소드 또는 생성자 선언에 사용되며, 해당 메소드나 생성자가 발생시킬 수 있는 예외를 나열합니다. 이 키워드는 호출자에게 이 메소드를 호출할 때 예외를 처리할 준비를 해야함을 알립니다.
+
+예를 들어, 다음은 `IOException`을 던질 수 있는 메소드 선언입니다:
+
+```java
+public void writeToFile(String text) throws IOException {
+    // File writing code...
+}
+```
+
+위 메소드에서, 파일 쓰기 도중 문제가 발생하면 `IOException`이 발생할 수 있습니다. 이 메소드를 호출하는 코드는 `try-catch` 블록 내에서 이 메소드를 호출하거나, 또는 이 메소드가 던진 `IOException`을 다시 던지도록 선언해야 합니다.
+
+**throw와 throws의 조합**
+
+`throw`와 `throws`는 종종 함께 사용됩니다. 메소드 내에서 `throw`를 사용하여 예외를 던지고, `throws`를 사용하여 이 예외를 메소드 선언에 나열할 수 있습니다.
+
+```java
+public void makePayment(double payment) throws IllegalArgumentException {
+    if (payment <= 0) {
+        throw new IllegalArgumentException("Payment must be positive.");
+    }
+    // Payment processing code...
+}
+```
+
+이 코드에서 `makePayment` 메소드는 `IllegalArgumentException`을 발생시킬 수 있음을 선언하고 있습니다. 이 메소드를 호출하는 코드는 이 예외를 처리하도록 작성되어야 합니다.
