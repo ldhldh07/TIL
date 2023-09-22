@@ -1,45 +1,43 @@
-def find(parent, i):
-    if parent[i] == i:
-        return i
-    return find(parent, parent[i])
+class DisjointSet:
+    def __init__(self, n):
+        self.parent = list(range(n))
+        self.rank = [0 for _ in range(n)]
 
-def union(parent, rank, x, y):
-    xroot = find(parent, x)
-    yroot = find(parent, y)
+    def find(self, x):
+        if self.parent[x] != x:
+            self.parent[x] = self.find(self.parent[x])
+        return self.parent[x]
+    
+    def union(self, x, y):
+        x_root = self.find(x)
+        y_root = self.find(y)
 
-    if rank[xroot] < rank[yroot]:
-        parent[xroot] = yroot
-    elif rank[xroot] > rank[yroot]:
-        parent[yroot] = xroot
-    else :
-        parent[yroot] = xroot
-        rank[xroot] += 1
+        if x_root == y_root:
+            return
+        
+        if self.rank[x_root] < self.rank[y_root]:
+            self.parent[x_root] = y_root
 
-def kruskal(graph):
-    result = []
-    i, e = 0, 0
+        else:
+            self.parent[y_root] = x_root
+            if self.rank[x_root] == self.rank[y_root]:
+                self.rank[x_root] += 1
 
-    graph = sorted(graph,key=lambda item: item[2])
-    parent = []
-    rank = []
 
-    for node in range(len(graph)):
-        parent.append(node)
-        rank.append(0)
+def kruskal(n, adj_list):
+    sum_cost = 0
+    adj_list.sort(key=lambda adj : adj[2])
+    disjoint_set = DisjointSet(n)
 
-    while e < len(graph) -1 :
-        u,v,w = graph[i]
-        i = i + 1
-        x = find(parent, u)
-        y = find(parent ,v)
+    count = 0
 
-        if x != y:
-            e = e + 1
-            result.append([u,v,w])
-            union(parent, rank, x, y)      
+    for start_node, end_node, cost in adj_list:
+        if disjoint_set.find(start_node) != disjoint_set.find(end_node):
+            disjoint_set.union(start_node, end_node)
+            sum_cost += cost
+            count += 1
+        
+        if count == n-1:
+            break
 
-    return result
-
-# 그래프 예시 (u, v, weight)
-graph = [[0, 1, 10], [0, 2, 6], [0, 3, 5], [1, 3, 15], [2, 3, 4]]
-print(kruskal(graph))
+    return sum_cost
