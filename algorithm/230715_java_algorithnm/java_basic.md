@@ -536,6 +536,7 @@ Queue 인터페이스의 주요 메서드에는 다음과 같은 것들이 있�
 - `remove()`: 큐의 앞에서 요소를 삭제하고 반환합니다. 큐가 비어 있으면 예외를 발생시킵니다.
 - `peek()`: 큐의 앞에서 요소를 삭제하지 않고 반환합니다. 큐가 비어 있으면 null을 반환합니다.
 - `size()`: 큐의 크기(요소의 수)를 반환합니다.
+- `poll()`: 앞의 요소 삭제 반환
 
 다음은 Queue의 사용 예제입니다:
 
@@ -1287,3 +1288,153 @@ public void makePayment(double payment) throws IllegalArgumentException {
 ```
 
 이 코드에서 `makePayment` 메소드는 `IllegalArgumentException`을 발생시킬 수 있음을 선언하고 있습니다. 이 메소드를 호출하는 코드는 이 예외를 처리하도록 작성되어야 합니다.
+
+## Collections
+
+아래는 `Collections` 클래스의 주요 메소드들과 각 메소드를 사용하는 예제 코드입니다.
+
+### 정렬 관련
+
+#### sort
+
+```java
+List<Integer> list = Arrays.asList(3, 1, 4, 1, 5, 9);
+Collections.sort(list);
+// list: [1, 1, 3, 4, 5, 9]
+```
+
+#### sort with Comparator
+
+```java
+List<String> list = Arrays.asList("apple", "banana", "cherry");
+Collections.sort(list, Comparator.reverseOrder());
+// list: ["cherry", "banana", "apple"]
+```
+
+### 검색 관련
+
+#### binarySearch
+
+```java
+List<Integer> list = Arrays.asList(1, 3, 5, 7, 9);
+int index = Collections.binarySearch(list, 5); // index = 2
+```
+
+### 원소 조작
+
+#### reverse
+
+```java
+List<Integer> list = Arrays.asList(1, 2, 3, 4, 5);
+Collections.reverse(list);
+// list: [5, 4, 3, 2, 1]
+```
+
+#### shuffle
+
+```java
+Copy codeList<Integer> list = Arrays.asList(1, 2, 3, 4, 5);
+Collections.shuffle(list);
+// list: (순서가 무작위로 바뀜)
+```
+
+#### swap
+
+```java
+List<Integer> list = Arrays.asList(1, 2, 3, 4, 5);
+Collections.swap(list, 0, 4);
+// list: [5, 2, 3, 4, 1]
+```
+
+### 기타 유용한 메소드
+
+#### min, max
+
+```
+javaCopy codeList<Integer> list = Arrays.asList(1, 2, 3, 4, 5);
+int min = Collections.min(list); // min = 1
+int max = Collections.max(list); // max = 5
+```
+
+#### frequency
+
+```
+javaCopy codeList<Integer> list = Arrays.asList(1, 1, 2, 3, 3, 3, 4);
+int freq = Collections.frequency(list, 3); // freq = 3
+```
+
+#### disjoint
+
+```
+javaCopy codeList<Integer> list1 = Arrays.asList(1, 2, 3);
+List<Integer> list2 = Arrays.asList(4, 5, 6);
+boolean result = Collections.disjoint(list1, list2); // result = true
+```
+
+### 불변과 싱글톤 컬렉션 생성
+
+#### unmodifiableList
+
+```
+javaCopy codeList<Integer> list = Arrays.asList(1, 2, 3);
+List<Integer> unmodifiableList = Collections.unmodifiableList(list);
+```
+
+#### singletonList
+
+```
+javaCopy codeList<Integer> singletonList = Collections.singletonList(1);
+// singletonList: [1]
+```
+
+이러한 메소드들은 종종 함께 사용되어 더 복잡한 작업을 수행합니다. 예제 코드는 각 메소드의 기본적인 사용법을 보여줍니다.
+
+
+
+
+
+![User](./java_basic.assets/imageurl=https%253A%252F%252Flh3.googleusercontent.png)
+
+
+
+스트림을 arraylist나 set으로 바꾸는것도 있지 않나
+
+
+
+ChatGPT
+
+
+
+네, Java 8 이상에서는 Stream API를 사용하여 컬렉션을 다룰 수 있으며, 스트림을 `ArrayList`나 `Set` 등으로 바꾸는 작업도 간단합니다.
+
+### 스트림을 ArrayList로 바꾸기
+
+스트림의 `collect` 메소드와 `Collectors.toList()` 를 사용하여 `ArrayList`로 바꿀 수 있습니다.
+
+```
+javaCopy codeimport java.util.stream.Collectors;
+import java.util.stream.Stream;
+import java.util.List;
+
+// ...
+
+Stream<Integer> stream = Stream.of(1, 2, 3, 4, 5);
+List<Integer> list = stream.collect(Collectors.toList());
+```
+
+### 스트림을 Set으로 바꾸기
+
+스트림의 `collect` 메소드와 `Collectors.toSet()`을 사용하여 `Set`으로 바꿀 수 있습니다.
+
+```
+javaCopy codeimport java.util.stream.Collectors;
+import java.util.stream.Stream;
+import java.util.Set;
+
+// ...
+
+Stream<Integer> stream = Stream.of(1, 2, 3, 4, 5);
+Set<Integer> set = stream.collect(Collectors.toSet());
+```
+
+이렇게 하면 스트림의 원소가 `ArrayList`나 `Set`에 저장됩니다. `Collectors` 클래스는 이 외에도 다양한 유용한 메소드를 제공하여 스트림을 다양한 타입의 컬렉션으로 변환할 수 있습니다.
